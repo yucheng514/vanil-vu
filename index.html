@@ -1,41 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite App</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
-</head>
-
-<body>
-  <style>
-    @font-face {
-      font-family: 'iconfont';
-      /* Project id 4542187 */
-      src: url('//at.alicdn.com/t/c/font_4542187_qom2bqo6968.woff2?t=1715413677001') format('woff2'),
-        url('//at.alicdn.com/t/c/font_4542187_qom2bqo6968.woff?t=1715413677001') format('woff'),
-        url('//at.alicdn.com/t/c/font_4542187_qom2bqo6968.ttf?t=1715413677001') format('truetype');
-    }
-
-    .iconfont {
-      font-family: "iconfont" !important;
-      font-size: 161px;
-      /* color: black; */
-      font-style: normal;
-      -webkit-font-smoothing: antialiased;
-      -webkit-text-stroke-width: 0.2px;
-      -moz-osx-font-smoothing: grayscale;
-
-    }
-
-    i:before {
-      content: "\e6fa";
-    }
-  </style>
-  <!-- <div id="app"></div> -->
-  <i class="iconfont">&#xe6fa;</i>
-  <script type="module" src="/main.js"></script>
-</body>
-
+    <body>
+        <div id="app">
+            <button v-on:click="click">click me</button>
+            <my-component></my-component>
+        </div>
+        <script type="module" src="/main.js"></script>
+    </body>
 </html>
