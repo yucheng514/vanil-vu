@@ -634,31 +634,31 @@ const Vue = (function () {
 
     /*  */
 
-    var warn = noop;
+    // var warn = noop;
     var tip = noop;
-    var generateComponentTrace = noop; // work around flow check
-    var formatComponentName = noop;
+    // var generateComponentTrace = noop; // work around flow check
+    // var formatComponentName = noop;
 
     {
-        var hasConsole = typeof console !== "undefined";
-        var classifyRE = /(?:^|[-_])(\w)/g;
-        var classify = function (str) {
-            return str
-                .replace(classifyRE, function (c) {
-                    return c.toUpperCase();
-                })
-                .replace(/[-_]/g, "");
-        };
+        // var hasConsole = typeof console !== "undefined";
+        // var classifyRE = /(?:^|[-_])(\w)/g;
+        // var classify = function (str) {
+        //     return str
+        //         .replace(classifyRE, function (c) {
+        //             return c.toUpperCase();
+        //         })
+        //         .replace(/[-_]/g, "");
+        // };
 
-        warn = function (msg, vm) {
-            var trace = vm ? generateComponentTrace(vm) : "";
+        // warn = function (msg, vm) {
+        //     var trace = vm ? generateComponentTrace(vm) : "";
 
-            if (config.warnHandler) {
-                config.warnHandler.call(null, msg, vm, trace);
-            } else if (hasConsole && !config.silent) {
-                console.error("[Vue warn]: " + msg + trace);
-            }
-        };
+        //     if (config.warnHandler) {
+        //         config.warnHandler.call(null, msg, vm, trace);
+        //     } else if (hasConsole && !config.silent) {
+        //         console.error("[Vue warn]: " + msg + trace);
+        //     }
+        // };
 
         tip = function (msg, vm) {
             if (hasConsole && !config.silent) {
@@ -668,28 +668,28 @@ const Vue = (function () {
             }
         };
 
-        formatComponentName = function (vm, includeFile) {
-            if (vm.$root === vm) {
-                return "<Root>";
-            }
-            var options =
-                typeof vm === "function" && vm.cid != null
-                    ? vm.options
-                    : vm._isVue
-                    ? vm.$options || vm.constructor.options
-                    : vm;
-            var name = options.name || options._componentTag;
-            var file = options.__file;
-            if (!name && file) {
-                var match = file.match(/([^/\\]+)\.vue$/);
-                name = match && match[1];
-            }
+        // formatComponentName = function (vm, includeFile) {
+        //     if (vm.$root === vm) {
+        //         return "<Root>";
+        //     }
+        //     var options =
+        //         typeof vm === "function" && vm.cid != null
+        //             ? vm.options
+        //             : vm._isVue
+        //             ? vm.$options || vm.constructor.options
+        //             : vm;
+        //     var name = options.name || options._componentTag;
+        //     var file = options.__file;
+        //     if (!name && file) {
+        //         var match = file.match(/([^/\\]+)\.vue$/);
+        //         name = match && match[1];
+        //     }
 
-            return (
-                (name ? "<" + classify(name) + ">" : "<Anonymous>") +
-                (file && includeFile !== false ? " at " + file : "")
-            );
-        };
+        //     return (
+        //         (name ? "<" + classify(name) + ">" : "<Anonymous>") +
+        //         (file && includeFile !== false ? " at " + file : "")
+        //     );
+        // };
 
         var repeat = function (str, n) {
             var res = "";
@@ -1058,68 +1058,68 @@ const Vue = (function () {
         return ob;
     }
 
-    /**
-     * Define a reactive property on an Object.
-     */
-    function defineReactive$$1(obj, key, val, customSetter, shallow) {
-        var dep = new Dep();
+    // /**
+    //  * Define a reactive property on an Object.
+    //  */
+    // function defineReactive$$1(obj, key, val, customSetter, shallow) {
+    //     var dep = new Dep();
 
-        var property = Object.getOwnPropertyDescriptor(obj, key);
-        if (property && property.configurable === false) {
-            return;
-        }
+    //     var property = Object.getOwnPropertyDescriptor(obj, key);
+    //     if (property && property.configurable === false) {
+    //         return;
+    //     }
 
-        // cater for pre-defined getter/setters
-        var getter = property && property.get;
-        var setter = property && property.set;
-        if ((!getter || setter) && arguments.length === 2) {
-            val = obj[key];
-        }
+    //     // cater for pre-defined getter/setters
+    //     var getter = property && property.get;
+    //     var setter = property && property.set;
+    //     if ((!getter || setter) && arguments.length === 2) {
+    //         val = obj[key];
+    //     }
 
-        var childOb = !shallow && observe(val);
-        Object.defineProperty(obj, key, {
-            enumerable: true,
-            configurable: true,
-            get: function reactiveGetter() {
-                var value = getter ? getter.call(obj) : val;
-                if (Dep.target) {
-                    dep.depend();
-                    if (childOb) {
-                        childOb.dep.depend();
-                        if (Array.isArray(value)) {
-                            dependArray(value);
-                        }
-                    }
-                }
-                return value;
-            },
-            set: function reactiveSetter(newVal) {
-                var value = getter ? getter.call(obj) : val;
-                /* eslint-disable no-self-compare */
-                if (
-                    newVal === value ||
-                    (newVal !== newVal && value !== value)
-                ) {
-                    return;
-                }
-                /* eslint-enable no-self-compare */
-                if (customSetter) {
-                    customSetter();
-                }
-                // #7981: for accessor properties without setter
-                if (getter && !setter) {
-                    return;
-                }
-                if (setter) {
-                    setter.call(obj, newVal);
-                } else {
-                    val = newVal;
-                }
-                childOb = !shallow && observe(newVal);
-                dep.notify();
-            },
-        });
-    }
+    //     var childOb = !shallow && observe(val);
+    //     Object.defineProperty(obj, key, {
+    //         enumerable: true,
+    //         configurable: true,
+    //         get: function reactiveGetter() {
+    //             var value = getter ? getter.call(obj) : val;
+    //             if (Dep.target) {
+    //                 dep.depend();
+    //                 if (childOb) {
+    //                     childOb.dep.depend();
+    //                     if (Array.isArray(value)) {
+    //                         dependArray(value);
+    //                     }
+    //                 }
+    //             }
+    //             return value;
+    //         },
+    //         set: function reactiveSetter(newVal) {
+    //             var value = getter ? getter.call(obj) : val;
+    //             /* eslint-disable no-self-compare */
+    //             if (
+    //                 newVal === value ||
+    //                 (newVal !== newVal && value !== value)
+    //             ) {
+    //                 return;
+    //             }
+    //             /* eslint-enable no-self-compare */
+    //             if (customSetter) {
+    //                 customSetter();
+    //             }
+    //             // #7981: for accessor properties without setter
+    //             if (getter && !setter) {
+    //                 return;
+    //             }
+    //             if (setter) {
+    //                 setter.call(obj, newVal);
+    //             } else {
+    //                 val = newVal;
+    //             }
+    //             childOb = !shallow && observe(newVal);
+    //             dep.notify();
+    //         },
+    //     });
+    // }
 
     /**
      * Set a property on an object. Adds the new property and
@@ -1448,14 +1448,14 @@ const Vue = (function () {
         return childVal === undefined ? parentVal : childVal;
     };
 
-    /**
-     * Validate component names
-     */
-    function checkComponents(options) {
-        for (var key in options.components) {
-            validateComponentName(key);
-        }
-    }
+    // /**
+    //  * Validate component names
+    //  */
+    // function checkComponents(options) {
+    //     for (var key in options.components) {
+    //         validateComponentName(key);
+    //     }
+    // }
 
     function validateComponentName(name) {
         if (
@@ -1479,91 +1479,91 @@ const Vue = (function () {
         }
     }
 
-    /**
-     * Ensure all props option syntax are normalized into the
-     * Object-based format.
-     */
-    function normalizeProps(options, vm) {
-        var props = options.props;
-        if (!props) {
-            return;
-        }
-        var res = {};
-        var i, val, name;
-        if (Array.isArray(props)) {
-            i = props.length;
-            while (i--) {
-                val = props[i];
-                if (typeof val === "string") {
-                    name = camelize(val);
-                    res[name] = { type: null };
-                } else {
-                    warn("props must be strings when using array syntax.");
-                }
-            }
-        } else if (isPlainObject(props)) {
-            for (var key in props) {
-                val = props[key];
-                name = camelize(key);
-                res[name] = isPlainObject(val) ? val : { type: val };
-            }
-        } else {
-            warn(
-                'Invalid value for option "props": expected an Array or an Object, ' +
-                    "but got " +
-                    toRawType(props) +
-                    ".",
-                vm
-            );
-        }
-        options.props = res;
-    }
+    // /**
+    //  * Ensure all props option syntax are normalized into the
+    //  * Object-based format.
+    //  */
+    // function normalizeProps(options, vm) {
+    //     var props = options.props;
+    //     if (!props) {
+    //         return;
+    //     }
+    //     var res = {};
+    //     var i, val, name;
+    //     if (Array.isArray(props)) {
+    //         i = props.length;
+    //         while (i--) {
+    //             val = props[i];
+    //             if (typeof val === "string") {
+    //                 name = camelize(val);
+    //                 res[name] = { type: null };
+    //             } else {
+    //                 warn("props must be strings when using array syntax.");
+    //             }
+    //         }
+    //     } else if (isPlainObject(props)) {
+    //         for (var key in props) {
+    //             val = props[key];
+    //             name = camelize(key);
+    //             res[name] = isPlainObject(val) ? val : { type: val };
+    //         }
+    //     } else {
+    //         warn(
+    //             'Invalid value for option "props": expected an Array or an Object, ' +
+    //                 "but got " +
+    //                 toRawType(props) +
+    //                 ".",
+    //             vm
+    //         );
+    //     }
+    //     options.props = res;
+    // }
 
-    /**
-     * Normalize all injections into Object-based format
-     */
-    function normalizeInject(options, vm) {
-        var inject = options.inject;
-        if (!inject) {
-            return;
-        }
-        var normalized = (options.inject = {});
-        if (Array.isArray(inject)) {
-            for (var i = 0; i < inject.length; i++) {
-                normalized[inject[i]] = { from: inject[i] };
-            }
-        } else if (isPlainObject(inject)) {
-            for (var key in inject) {
-                var val = inject[key];
-                normalized[key] = isPlainObject(val)
-                    ? extend({ from: key }, val)
-                    : { from: val };
-            }
-        } else {
-            warn(
-                'Invalid value for option "inject": expected an Array or an Object, ' +
-                    "but got " +
-                    toRawType(inject) +
-                    ".",
-                vm
-            );
-        }
-    }
+    // /**
+    //  * Normalize all injections into Object-based format
+    //  */
+    // function normalizeInject(options, vm) {
+    //     var inject = options.inject;
+    //     if (!inject) {
+    //         return;
+    //     }
+    //     var normalized = (options.inject = {});
+    //     if (Array.isArray(inject)) {
+    //         for (var i = 0; i < inject.length; i++) {
+    //             normalized[inject[i]] = { from: inject[i] };
+    //         }
+    //     } else if (isPlainObject(inject)) {
+    //         for (var key in inject) {
+    //             var val = inject[key];
+    //             normalized[key] = isPlainObject(val)
+    //                 ? extend({ from: key }, val)
+    //                 : { from: val };
+    //         }
+    //     } else {
+    //         warn(
+    //             'Invalid value for option "inject": expected an Array or an Object, ' +
+    //                 "but got " +
+    //                 toRawType(inject) +
+    //                 ".",
+    //             vm
+    //         );
+    //     }
+    // }
 
-    /**
-     * Normalize raw function directives into object format.
-     */
-    function normalizeDirectives(options) {
-        var dirs = options.directives;
-        if (dirs) {
-            for (var key in dirs) {
-                var def$$1 = dirs[key];
-                if (typeof def$$1 === "function") {
-                    dirs[key] = { bind: def$$1, update: def$$1 };
-                }
-            }
-        }
-    }
+    // /**
+    //  * Normalize raw function directives into object format.
+    //  */
+    // function normalizeDirectives(options) {
+    //     var dirs = options.directives;
+    //     if (dirs) {
+    //         for (var key in dirs) {
+    //             var def$$1 = dirs[key];
+    //             if (typeof def$$1 === "function") {
+    //                 dirs[key] = { bind: def$$1, update: def$$1 };
+    //             }
+    //         }
+    //     }
+    // }
 
     function assertObjectType(name, value, vm) {
         if (!isPlainObject(value)) {
@@ -2581,47 +2581,47 @@ const Vue = (function () {
 
     /*  */
 
-    /**
-     * Runtime helper for resolving raw children VNodes into a slot object.
-     */
-    function resolveSlots(children, context) {
-        if (!children || !children.length) {
-            return {};
-        }
-        var slots = {};
-        for (var i = 0, l = children.length; i < l; i++) {
-            var child = children[i];
-            var data = child.data;
-            // remove slot attribute if the node is resolved as a Vue slot node
-            if (data && data.attrs && data.attrs.slot) {
-                delete data.attrs.slot;
-            }
-            // named slots should only be respected if the vnode was rendered in the
-            // same context.
-            if (
-                (child.context === context || child.fnContext === context) &&
-                data &&
-                data.slot != null
-            ) {
-                var name = data.slot;
-                var slot = slots[name] || (slots[name] = []);
-                if (child.tag === "template") {
-                    slot.push.apply(slot, child.children || []);
-                } else {
-                    slot.push(child);
-                }
-            } else {
-                (slots.default || (slots.default = [])).push(child);
-            }
-        }
-        // ignore slots that contains only whitespace
-        for (var name$1 in slots) {
-            if (slots[name$1].every(isWhitespace)) {
-                delete slots[name$1];
-            }
-        }
-        return slots;
-    }
+    // /**
+    //  * Runtime helper for resolving raw children VNodes into a slot object.
+    //  */
+    // function resolveSlots(children, context) {
+    //     if (!children || !children.length) {
+    //         return {};
+    //     }
+    //     var slots = {};
+    //     for (var i = 0, l = children.length; i < l; i++) {
+    //         var child = children[i];
+    //         var data = child.data;
+    //         // remove slot attribute if the node is resolved as a Vue slot node
+    //         if (data && data.attrs && data.attrs.slot) {
+    //             delete data.attrs.slot;
+    //         }
+    //         // named slots should only be respected if the vnode was rendered in the
+    //         // same context.
+    //         if (
+    //             (child.context === context || child.fnContext === context) &&
+    //             data &&
+    //             data.slot != null
+    //         ) {
+    //             var name = data.slot;
+    //             var slot = slots[name] || (slots[name] = []);
+    //             if (child.tag === "template") {
+    //                 slot.push.apply(slot, child.children || []);
+    //             } else {
+    //                 slot.push(child);
+    //             }
+    //         } else {
+    //             (slots.default || (slots.default = [])).push(child);
+    //         }
+    //     }
+    //     // ignore slots that contains only whitespace
+    //     for (var name$1 in slots) {
+    //         if (slots[name$1].every(isWhitespace)) {
+    //             delete slots[name$1];
+    //         }
+    //     }
+    //     return slots;
+    // }
 
     function isWhitespace(node) {
         return (node.isComment && !node.asyncFactory) || node.text === " ";
@@ -3473,26 +3473,26 @@ const Vue = (function () {
     var SIMPLE_NORMALIZE = 1;
     var ALWAYS_NORMALIZE = 2;
 
-    // wrapper function for providing a more flexible interface
-    // without getting yelled at by flow
-    function createElement(
-        context,
-        tag,
-        data,
-        children,
-        normalizationType,
-        alwaysNormalize
-    ) {
-        if (Array.isArray(data) || isPrimitive(data)) {
-            normalizationType = children;
-            children = data;
-            data = undefined;
-        }
-        if (isTrue(alwaysNormalize)) {
-            normalizationType = ALWAYS_NORMALIZE;
-        }
-        return _createElement(context, tag, data, children, normalizationType);
-    }
+    // // wrapper function for providing a more flexible interface
+    // // without getting yelled at by flow
+    // function createElement(
+    //     context,
+    //     tag,
+    //     data,
+    //     children,
+    //     normalizationType,
+    //     alwaysNormalize
+    // ) {
+    //     if (Array.isArray(data) || isPrimitive(data)) {
+    //         normalizationType = children;
+    //         children = data;
+    //         data = undefined;
+    //     }
+    //     if (isTrue(alwaysNormalize)) {
+    //         normalizationType = ALWAYS_NORMALIZE;
+    //     }
+    //     return _createElement(context, tag, data, children, normalizationType);
+    // }
 
     function _createElement(context, tag, data, children, normalizationType) {
         if (isDef(data) && isDef(data.__ob__)) {
@@ -3637,55 +3637,55 @@ const Vue = (function () {
 
     /*  */
 
-    function initRender(vm) {
-        vm._vnode = null; // the root of the child tree
-        vm._staticTrees = null; // v-once cached trees
-        var options = vm.$options;
-        var parentVnode = (vm.$vnode = options._parentVnode); // the placeholder node in parent tree
-        var renderContext = parentVnode && parentVnode.context;
-        vm.$slots = resolveSlots(options._renderChildren, renderContext);
-        vm.$scopedSlots = emptyObject;
-        // bind the createElement fn to this instance
-        // so that we get proper render context inside it.
-        // args order: tag, data, children, normalizationType, alwaysNormalize
-        // internal version is used by render functions compiled from templates
-        vm._c = function (a, b, c, d) {
-            return createElement(vm, a, b, c, d, false);
-        };
-        // normalization is always applied for the public version, used in
-        // user-written render functions.
-        vm.$createElement = function (a, b, c, d) {
-            return createElement(vm, a, b, c, d, true);
-        };
+    // function initRender(vm) {
+    //     vm._vnode = null; // the root of the child tree
+    //     vm._staticTrees = null; // v-once cached trees
+    //     var options = vm.$options;
+    //     var parentVnode = (vm.$vnode = options._parentVnode); // the placeholder node in parent tree
+    //     var renderContext = parentVnode && parentVnode.context;
+    //     vm.$slots = resolveSlots(options._renderChildren, renderContext);
+    //     vm.$scopedSlots = emptyObject;
+    //     // bind the createElement fn to this instance
+    //     // so that we get proper render context inside it.
+    //     // args order: tag, data, children, normalizationType, alwaysNormalize
+    //     // internal version is used by render functions compiled from templates
+    //     vm._c = function (a, b, c, d) {
+    //         return createElement(vm, a, b, c, d, false);
+    //     };
+    //     // normalization is always applied for the public version, used in
+    //     // user-written render functions.
+    //     vm.$createElement = function (a, b, c, d) {
+    //         return createElement(vm, a, b, c, d, true);
+    //     };
 
-        // $attrs & $listeners are exposed for easier HOC creation.
-        // they need to be reactive so that HOCs using them are always updated
-        var parentData = parentVnode && parentVnode.data;
+    //     // $attrs & $listeners are exposed for easier HOC creation.
+    //     // they need to be reactive so that HOCs using them are always updated
+    //     var parentData = parentVnode && parentVnode.data;
 
-        /* istanbul ignore else */
-        {
-            defineReactive$$1(
-                vm,
-                "$attrs",
-                (parentData && parentData.attrs) || emptyObject,
-                function () {
-                    !isUpdatingChildComponent &&
-                        warn("$attrs is readonly.", vm);
-                },
-                true
-            );
-            defineReactive$$1(
-                vm,
-                "$listeners",
-                options._parentListeners || emptyObject,
-                function () {
-                    !isUpdatingChildComponent &&
-                        warn("$listeners is readonly.", vm);
-                },
-                true
-            );
-        }
-    }
+    //     /* istanbul ignore else */
+    //     {
+    //         defineReactive$$1(
+    //             vm,
+    //             "$attrs",
+    //             (parentData && parentData.attrs) || emptyObject,
+    //             function () {
+    //                 !isUpdatingChildComponent &&
+    //                     warn("$attrs is readonly.", vm);
+    //             },
+    //             true
+    //         );
+    //         defineReactive$$1(
+    //             vm,
+    //             "$listeners",
+    //             options._parentListeners || emptyObject,
+    //             function () {
+    //                 !isUpdatingChildComponent &&
+    //                     warn("$listeners is readonly.", vm);
+    //             },
+    //             true
+    //         );
+    //     }
+    // }
 
     var currentRenderingInstance = null;
 
@@ -3934,15 +3934,15 @@ const Vue = (function () {
 
     /*  */
 
-    function initEvents(vm) {
-        vm._events = Object.create(null);
-        vm._hasHookEvent = false;
-        // init parent attached events
-        var listeners = vm.$options._parentListeners;
-        if (listeners) {
-            updateComponentListeners(vm, listeners);
-        }
-    }
+    // function initEvents(vm) {
+    //     vm._events = Object.create(null);
+    //     vm._hasHookEvent = false;
+    //     // init parent attached events
+    //     var listeners = vm.$options._parentListeners;
+    //     if (listeners) {
+    //         updateComponentListeners(vm, listeners);
+    //     }
+    // }
 
     var target;
 
@@ -3964,18 +3964,18 @@ const Vue = (function () {
         };
     }
 
-    function updateComponentListeners(vm, listeners, oldListeners) {
-        target = vm;
-        updateListeners(
-            listeners,
-            oldListeners || {},
-            add,
-            remove$1,
-            createOnceHandler,
-            vm
-        );
-        target = undefined;
-    }
+    // function updateComponentListeners(vm, listeners, oldListeners) {
+    //     target = vm;
+    //     updateListeners(
+    //         listeners,
+    //         oldListeners || {},
+    //         add,
+    //         remove$1,
+    //         createOnceHandler,
+    //         vm
+    //     );
+    //     target = undefined;
+    // }
 
     function eventsMixin(Vue) {
         var hookRE = /^hook:/;
@@ -4082,7 +4082,7 @@ const Vue = (function () {
     /*  */
 
     var activeInstance = null;
-    var isUpdatingChildComponent = false;
+    // var isUpdatingChildComponent = false;
 
     function setActiveInstance(vm) {
         var prevActiveInstance = activeInstance;
@@ -4092,31 +4092,31 @@ const Vue = (function () {
         };
     }
 
-    function initLifecycle(vm) {
-        var options = vm.$options;
+    // function initLifecycle(vm) {
+    //     var options = vm.$options;
 
-        // locate first non-abstract parent
-        var parent = options.parent;
-        if (parent && !options.abstract) {
-            while (parent.$options.abstract && parent.$parent) {
-                parent = parent.$parent;
-            }
-            parent.$children.push(vm);
-        }
+    //     // locate first non-abstract parent
+    //     var parent = options.parent;
+    //     if (parent && !options.abstract) {
+    //         while (parent.$options.abstract && parent.$parent) {
+    //             parent = parent.$parent;
+    //         }
+    //         parent.$children.push(vm);
+    //     }
 
-        vm.$parent = parent;
-        vm.$root = parent ? parent.$root : vm;
+    //     vm.$parent = parent;
+    //     vm.$root = parent ? parent.$root : vm;
 
-        vm.$children = [];
-        vm.$refs = {};
+    //     vm.$children = [];
+    //     vm.$refs = {};
 
-        vm._watcher = null;
-        vm._inactive = null;
-        vm._directInactive = false;
-        vm._isMounted = false;
-        vm._isDestroyed = false;
-        vm._isBeingDestroyed = false;
-    }
+    //     vm._watcher = null;
+    //     vm._inactive = null;
+    //     vm._directInactive = false;
+    //     vm._isMounted = false;
+    //     vm._isDestroyed = false;
+    //     vm._isBeingDestroyed = false;
+    // }
 
     function lifecycleMixin(Vue) {
         Vue.prototype._update = function (vnode, hydrating) {

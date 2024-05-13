@@ -1,7 +1,15 @@
 // init 用的函数都在这儿
 
 import { config, inBrowser } from "../globalData";
-import { mergeOptions } from "./utils";
+import {
+    mergeOptions,
+    emptyObject,
+    createElement,
+    defineReactive$$1,
+    resolveConstructorOptions
+} from "./utils";
+import { updateComponentListeners, isUpdatingChildComponent } from "./update";
+import { resolveSlots } from "./slots";
 var uid$3 = 0;
 
 var mark;
@@ -65,7 +73,88 @@ function initInternalComponent(vm, options) {
         opts.staticRenderFns = options.staticRenderFns;
     }
 }
+function initLifecycle(vm) {
+    var options = vm.$options;
 
+    // locate first non-abstract parent
+    var parent = options.parent;
+    if (parent && !options.abstract) {
+        while (parent.$options.abstract && parent.$parent) {
+            parent = parent.$parent;
+        }
+        parent.$children.push(vm);
+    }
+
+    vm.$parent = parent;
+    vm.$root = parent ? parent.$root : vm;
+
+    vm.$children = [];
+    vm.$refs = {};
+
+    vm._watcher = null;
+    vm._inactive = null;
+    vm._directInactive = false;
+    vm._isMounted = false;
+    vm._isDestroyed = false;
+    vm._isBeingDestroyed = false;
+}
+function initEvents(vm) {
+    vm._events = Object.create(null);
+    vm._hasHookEvent = false;
+    // init parent attached events
+    var listeners = vm.$options._parentListeners;
+    if (listeners) {
+        updateComponentListeners(vm, listeners);
+    }
+}
+function initRender(vm) {
+    vm._vnode = null; // the root of the child tree
+    vm._staticTrees = null; // v-once cached trees
+    var options = vm.$options;
+    var parentVnode = (vm.$vnode = options._parentVnode); // the placeholder node in parent tree
+    var renderContext = parentVnode && parentVnode.context;
+    vm.$slots = resolveSlots(options._renderChildren, renderContext);
+    vm.$scopedSlots = emptyObject;
+    // bind the createElement fn to this instance
+    // so that we get proper render context inside it.
+    // args order: tag, data, children, normalizationType, alwaysNormalize
+    // internal version is used by render functions compiled from templates
+    vm._c = function (a, b, c, d) {
+        return createElement(vm, a, b, c, d, false);
+    };
+    // normalization is always applied for the public version, used in
+    // user-written render functions.
+    vm.$createElement = function (a, b, c, d) {
+        return createElement(vm, a, b, c, d, true);
+    };
+
+    // $attrs & $listeners are exposed for easier HOC creation.
+    // they need to be reactive so that HOCs using them are always updated
+    var parentData = parentVnode && parentVnode.data;
+
+    /* istanbul ignore else */
+    {
+        defineReactive$$1(
+            vm,
+            "$attrs",
+            (parentData && parentData.attrs) || emptyObject,
+            function () {
+                !isUpdatingChildComponent && warn("$attrs is readonly.", vm);
+            },
+            true
+        );
+        defineReactive$$1(
+            vm,
+            "$listeners",
+            options._parentListeners || emptyObject,
+            function () {
+                !isUpdatingChildComponent &&
+                    warn("$listeners is readonly.", vm);
+            },
+            true
+        );
+    }
+}
 function initMixin(Vue) {
     Vue.prototype._init = function (options) {
         // todo 这里的 this 指的是？
@@ -104,8 +193,6 @@ function initMixin(Vue) {
         // expose real self
         vm._self = vm;
 
-        // save here
-        
         initLifecycle(vm);
         initEvents(vm);
         initRender(vm);
