@@ -3,8 +3,7 @@
  * (c) 2014-2021 Evan You
  * Released under the MIT License.
  */
-const Vue = (this,
-function () {
+const Vue = (function () {
     "use strict";
 
     /*  */
@@ -261,28 +260,28 @@ function () {
 
     /* eslint-disable no-unused-vars */
 
-    /**
-     * Perform no operation.
-     * Stubbing args to make Flow happy without leaving useless transpiled code
-     * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/).
-     */
-    function noop(a, b, c) {}
+    // /**
+    //  * Perform no operation.
+    //  * Stubbing args to make Flow happy without leaving useless transpiled code
+    //  * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/).
+    //  */
+    // function noop(a, b, c) {}
 
-    /**
-     * Always return false.
-     */
-    var no = function (a, b, c) {
-        return false;
-    };
+    // /**
+    //  * Always return false.
+    //  */
+    // var no = function (a, b, c) {
+    //     return false;
+    // };
 
     /* eslint-enable no-unused-vars */
 
-    /**
-     * Return the same value.
-     */
-    var identity = function (_) {
-        return _;
-    };
+    // /**
+    //  * Return the same value.
+    //  */
+    // var identity = function (_) {
+    //     return _;
+    // };
 
     /**
      * Generate a string containing static keys from compiler modules.
@@ -373,116 +372,116 @@ function () {
 
     var ASSET_TYPES = ["component", "directive", "filter"];
 
-    var LIFECYCLE_HOOKS = [
-        "beforeCreate",
-        "created",
-        "beforeMount",
-        "mounted",
-        "beforeUpdate",
-        "updated",
-        "beforeDestroy",
-        "destroyed",
-        "activated",
-        "deactivated",
-        "errorCaptured",
-        "serverPrefetch",
-    ];
+    // var LIFECYCLE_HOOKS = [
+    //     "beforeCreate",
+    //     "created",
+    //     "beforeMount",
+    //     "mounted",
+    //     "beforeUpdate",
+    //     "updated",
+    //     "beforeDestroy",
+    //     "destroyed",
+    //     "activated",
+    //     "deactivated",
+    //     "errorCaptured",
+    //     "serverPrefetch",
+    // ];
 
     /*  */
 
-    var config = {
-        /**
-         * Option merge strategies (used in core/util/options)
-         */
-        // $flow-disable-line
-        optionMergeStrategies: Object.create(null),
+    // var config = {
+    //     /**
+    //      * Option merge strategies (used in core/util/options)
+    //      */
+    //     // $flow-disable-line
+    //     optionMergeStrategies: Object.create(null),
 
-        /**
-         * Whether to suppress warnings.
-         */
-        silent: false,
+    //     /**
+    //      * Whether to suppress warnings.
+    //      */
+    //     silent: false,
 
-        /**
-         * Show production mode tip message on boot?
-         */
-        productionTip: "development" !== "production",
+    //     /**
+    //      * Show production mode tip message on boot?
+    //      */
+    //     productionTip: "development" !== "production",
 
-        /**
-         * Whether to enable devtools
-         */
-        devtools: "development" !== "production",
+    //     /**
+    //      * Whether to enable devtools
+    //      */
+    //     devtools: "development" !== "production",
 
-        /**
-         * Whether to record perf
-         */
-        performance: false,
+    //     /**
+    //      * Whether to record perf
+    //      */
+    //     performance: false,
 
-        /**
-         * Error handler for watcher errors
-         */
-        errorHandler: null,
+    //     /**
+    //      * Error handler for watcher errors
+    //      */
+    //     errorHandler: null,
 
-        /**
-         * Warn handler for watcher warns
-         */
-        warnHandler: null,
+    //     /**
+    //      * Warn handler for watcher warns
+    //      */
+    //     warnHandler: null,
 
-        /**
-         * Ignore certain custom elements
-         */
-        ignoredElements: [],
+    //     /**
+    //      * Ignore certain custom elements
+    //      */
+    //     ignoredElements: [],
 
-        /**
-         * Custom user key aliases for v-on
-         */
-        // $flow-disable-line
-        keyCodes: Object.create(null),
+    //     /**
+    //      * Custom user key aliases for v-on
+    //      */
+    //     // $flow-disable-line
+    //     keyCodes: Object.create(null),
 
-        /**
-         * Check if a tag is reserved so that it cannot be registered as a
-         * component. This is platform-dependent and may be overwritten.
-         */
-        isReservedTag: no,
+    //     /**
+    //      * Check if a tag is reserved so that it cannot be registered as a
+    //      * component. This is platform-dependent and may be overwritten.
+    //      */
+    //     isReservedTag: no,
 
-        /**
-         * Check if an attribute is reserved so that it cannot be used as a component
-         * prop. This is platform-dependent and may be overwritten.
-         */
-        isReservedAttr: no,
+    //     /**
+    //      * Check if an attribute is reserved so that it cannot be used as a component
+    //      * prop. This is platform-dependent and may be overwritten.
+    //      */
+    //     isReservedAttr: no,
 
-        /**
-         * Check if a tag is an unknown element.
-         * Platform-dependent.
-         */
-        isUnknownElement: no,
+    //     /**
+    //      * Check if a tag is an unknown element.
+    //      * Platform-dependent.
+    //      */
+    //     isUnknownElement: no,
 
-        /**
-         * Get the namespace of an element
-         */
-        getTagNamespace: noop,
+    //     /**
+    //      * Get the namespace of an element
+    //      */
+    //     getTagNamespace: noop,
 
-        /**
-         * Parse the real tag name for the specific platform.
-         */
-        parsePlatformTagName: identity,
+    //     /**
+    //      * Parse the real tag name for the specific platform.
+    //      */
+    //     parsePlatformTagName: identity,
 
-        /**
-         * Check if an attribute must be bound using property, e.g. value
-         * Platform-dependent.
-         */
-        mustUseProp: no,
+    //     /**
+    //      * Check if an attribute must be bound using property, e.g. value
+    //      * Platform-dependent.
+    //      */
+    //     mustUseProp: no,
 
-        /**
-         * Perform updates asynchronously. Intended to be used by Vue Test Utils
-         * This will significantly reduce performance if set to false.
-         */
-        async: true,
+    //     /**
+    //      * Perform updates asynchronously. Intended to be used by Vue Test Utils
+    //      * This will significantly reduce performance if set to false.
+    //      */
+    //     async: true,
 
-        /**
-         * Exposed for legacy reasons
-         */
-        _lifecycleHooks: LIFECYCLE_HOOKS,
-    };
+    //     /**
+    //      * Exposed for legacy reasons
+    //      */
+    //     _lifecycleHooks: LIFECYCLE_HOOKS,
+    // };
 
     /*  */
 
@@ -539,8 +538,8 @@ function () {
     // can we use __proto__?
     var hasProto = "__proto__" in {};
 
-    // Browser environment sniffing
-    var inBrowser = typeof window !== "undefined";
+    // // Browser environment sniffing
+    // var inBrowser = typeof window !== "undefined";
     var inWeex =
         typeof WXEnvironment !== "undefined" && !!WXEnvironment.platform;
     var weexPlatform = inWeex && WXEnvironment.platform.toLowerCase();
@@ -1580,54 +1579,7 @@ function () {
         }
     }
 
-    /**
-     * Merge two option objects into a new one.
-     * Core utility used in both instantiation and inheritance.
-     */
-    function mergeOptions(parent, child, vm) {
-        {
-            checkComponents(child);
-        }
 
-        if (typeof child === "function") {
-            child = child.options;
-        }
-
-        normalizeProps(child, vm);
-        normalizeInject(child, vm);
-        normalizeDirectives(child);
-
-        // Apply extends and mixins on the child options,
-        // but only if it is a raw options object that isn't
-        // the result of another mergeOptions call.
-        // Only merged options has the _base property.
-        if (!child._base) {
-            if (child.extends) {
-                parent = mergeOptions(parent, child.extends, vm);
-            }
-            if (child.mixins) {
-                for (var i = 0, l = child.mixins.length; i < l; i++) {
-                    parent = mergeOptions(parent, child.mixins[i], vm);
-                }
-            }
-        }
-
-        var options = {};
-        var key;
-        for (key in parent) {
-            mergeField(key);
-        }
-        for (key in child) {
-            if (!hasOwn(parent, key)) {
-                mergeField(key);
-            }
-        }
-        function mergeField(key) {
-            var strat = strats[key] || defaultStrat;
-            options[key] = strat(parent[key], child[key], vm, key);
-        }
-        return options;
-    }
 
     /**
      * Resolve an asset.
@@ -2084,34 +2036,34 @@ function () {
 
     /*  */
 
-    var mark;
-    var measure;
+    // var mark;
+    // var measure;
 
-    {
-        var perf = inBrowser && window.performance;
-        /* istanbul ignore if */
-        if (
-            perf &&
-            perf.mark &&
-            perf.measure &&
-            perf.clearMarks &&
-            perf.clearMeasures
-        ) {
-            mark = function (tag) {
-                return perf.mark(tag);
-            };
-            measure = function (name, startTag, endTag) {
-                perf.measure(name, startTag, endTag);
-                perf.clearMarks(startTag);
-                perf.clearMarks(endTag);
-                // perf.clearMeasures(name)
-            };
-        }
-    }
+    // {
+    //     var perf = inBrowser && window.performance;
+    //     /* istanbul ignore if */
+    //     if (
+    //         perf &&
+    //         perf.mark &&
+    //         perf.measure &&
+    //         perf.clearMarks &&
+    //         perf.clearMeasures
+    //     ) {
+    //         mark = function (tag) {
+    //             return perf.mark(tag);
+    //         };
+    //         measure = function (name, startTag, endTag) {
+    //             perf.measure(name, startTag, endTag);
+    //             perf.clearMarks(startTag);
+    //             perf.clearMarks(endTag);
+    //             // perf.clearMeasures(name)
+    //         };
+    //     }
+    // }
 
     /* not type checking this file because flow doesn't play well with Proxy */
 
-    var initProxy;
+    // var initProxy;
 
     {
         var allowedGlobals = makeMap(
@@ -2202,19 +2154,19 @@ function () {
             },
         };
 
-        initProxy = function initProxy(vm) {
-            if (hasProxy) {
-                // determine which proxy handler to use
-                var options = vm.$options;
-                var handlers =
-                    options.render && options.render._withStripped
-                        ? getHandler
-                        : hasHandler;
-                vm._renderProxy = new Proxy(vm, handlers);
-            } else {
-                vm._renderProxy = vm;
-            }
-        };
+        // initProxy = function initProxy(vm) {
+        //     if (hasProxy) {
+        //         // determine which proxy handler to use
+        //         var options = vm.$options;
+        //         var handlers =
+        //             options.render && options.render._withStripped
+        //                 ? getHandler
+        //                 : hasHandler;
+        //         vm._renderProxy = new Proxy(vm, handlers);
+        //     } else {
+        //         vm._renderProxy = vm;
+        //     }
+        // };
     }
 
     /*  */
@@ -5246,110 +5198,110 @@ function () {
 
     /*  */
 
-    var uid$3 = 0;
+    // var uid$3 = 0;
 
-    function initMixin(Vue) {
-        Vue.prototype._init = function (options) {
-            var vm = this;
-            // a uid
-            vm._uid = uid$3++;
+    // function initMixin(Vue) {
+    //     Vue.prototype._init = function (options) {
+    //         var vm = this;
+    //         // a uid
+    //         vm._uid = uid$3++;
 
-            var startTag, endTag;
-            /* istanbul ignore if */
-            if (config.performance && mark) {
-                startTag = "vue-perf-start:" + vm._uid;
-                endTag = "vue-perf-end:" + vm._uid;
-                mark(startTag);
-            }
+    //         var startTag, endTag;
+    //         /* istanbul ignore if */
+    //         if (config.performance && mark) {
+    //             startTag = "vue-perf-start:" + vm._uid;
+    //             endTag = "vue-perf-end:" + vm._uid;
+    //             mark(startTag);
+    //         }
 
-            // a flag to avoid this being observed
-            vm._isVue = true;
-            // merge options
-            if (options && options._isComponent) {
-                // optimize internal component instantiation
-                // since dynamic options merging is pretty slow, and none of the
-                // internal component options needs special treatment.
-                initInternalComponent(vm, options);
-            } else {
-                vm.$options = mergeOptions(
-                    resolveConstructorOptions(vm.constructor),
-                    options || {},
-                    vm
-                );
-            }
-            /* istanbul ignore else */
-            {
-                initProxy(vm);
-            }
-            // expose real self
-            vm._self = vm;
-            initLifecycle(vm);
-            initEvents(vm);
-            initRender(vm);
-            callHook(vm, "beforeCreate");
-            initInjections(vm); // resolve injections before data/props
-            initState(vm);
-            initProvide(vm); // resolve provide after data/props
-            callHook(vm, "created");
+    //         // a flag to avoid this being observed
+    //         vm._isVue = true;
+    //         // merge options
+    //         if (options && options._isComponent) {
+    //             // optimize internal component instantiation
+    //             // since dynamic options merging is pretty slow, and none of the
+    //             // internal component options needs special treatment.
+    //             initInternalComponent(vm, options);
+    //         } else {
+    //             vm.$options = mergeOptions(
+    //                 resolveConstructorOptions(vm.constructor),
+    //                 options || {},
+    //                 vm
+    //             );
+    //         }
+    //         /* istanbul ignore else */
+    //         {
+    //             initProxy(vm);
+    //         }
+    //         // expose real self
+    //         vm._self = vm;
+    //         initLifecycle(vm);
+    //         initEvents(vm);
+    //         initRender(vm);
+    //         callHook(vm, "beforeCreate");
+    //         initInjections(vm); // resolve injections before data/props
+    //         initState(vm);
+    //         initProvide(vm); // resolve provide after data/props
+    //         callHook(vm, "created");
 
-            /* istanbul ignore if */
-            if (config.performance && mark) {
-                vm._name = formatComponentName(vm, false);
-                mark(endTag);
-                measure("vue " + vm._name + " init", startTag, endTag);
-            }
+    //         /* istanbul ignore if */
+    //         if (config.performance && mark) {
+    //             vm._name = formatComponentName(vm, false);
+    //             mark(endTag);
+    //             measure("vue " + vm._name + " init", startTag, endTag);
+    //         }
 
-            if (vm.$options.el) {
-                vm.$mount(vm.$options.el);
-            }
-        };
-    }
+    //         if (vm.$options.el) {
+    //             vm.$mount(vm.$options.el);
+    //         }
+    //     };
+    // }
 
-    function initInternalComponent(vm, options) {
-        var opts = (vm.$options = Object.create(vm.constructor.options));
-        // doing this because it's faster than dynamic enumeration.
-        var parentVnode = options._parentVnode;
-        opts.parent = options.parent;
-        opts._parentVnode = parentVnode;
+    // function initInternalComponent(vm, options) {
+    //     var opts = (vm.$options = Object.create(vm.constructor.options));
+    //     // doing this because it's faster than dynamic enumeration.
+    //     var parentVnode = options._parentVnode;
+    //     opts.parent = options.parent;
+    //     opts._parentVnode = parentVnode;
 
-        var vnodeComponentOptions = parentVnode.componentOptions;
-        opts.propsData = vnodeComponentOptions.propsData;
-        opts._parentListeners = vnodeComponentOptions.listeners;
-        opts._renderChildren = vnodeComponentOptions.children;
-        opts._componentTag = vnodeComponentOptions.tag;
+    //     var vnodeComponentOptions = parentVnode.componentOptions;
+    //     opts.propsData = vnodeComponentOptions.propsData;
+    //     opts._parentListeners = vnodeComponentOptions.listeners;
+    //     opts._renderChildren = vnodeComponentOptions.children;
+    //     opts._componentTag = vnodeComponentOptions.tag;
 
-        if (options.render) {
-            opts.render = options.render;
-            opts.staticRenderFns = options.staticRenderFns;
-        }
-    }
+    //     if (options.render) {
+    //         opts.render = options.render;
+    //         opts.staticRenderFns = options.staticRenderFns;
+    //     }
+    // }
 
-    function resolveConstructorOptions(Ctor) {
-        var options = Ctor.options;
-        if (Ctor.super) {
-            var superOptions = resolveConstructorOptions(Ctor.super);
-            var cachedSuperOptions = Ctor.superOptions;
-            if (superOptions !== cachedSuperOptions) {
-                // super option changed,
-                // need to resolve new options.
-                Ctor.superOptions = superOptions;
-                // check if there are any late-modified/attached options (#4976)
-                var modifiedOptions = resolveModifiedOptions(Ctor);
-                // update base extend options
-                if (modifiedOptions) {
-                    extend(Ctor.extendOptions, modifiedOptions);
-                }
-                options = Ctor.options = mergeOptions(
-                    superOptions,
-                    Ctor.extendOptions
-                );
-                if (options.name) {
-                    options.components[options.name] = Ctor;
-                }
-            }
-        }
-        return options;
-    }
+    // function resolveConstructorOptions(Ctor) {
+    //     var options = Ctor.options;
+    //     if (Ctor.super) {
+    //         var superOptions = resolveConstructorOptions(Ctor.super);
+    //         var cachedSuperOptions = Ctor.superOptions;
+    //         if (superOptions !== cachedSuperOptions) {
+    //             // super option changed,
+    //             // need to resolve new options.
+    //             Ctor.superOptions = superOptions;
+    //             // check if there are any late-modified/attached options (#4976)
+    //             var modifiedOptions = resolveModifiedOptions(Ctor);
+    //             // update base extend options
+    //             if (modifiedOptions) {
+    //                 extend(Ctor.extendOptions, modifiedOptions);
+    //             }
+    //             options = Ctor.options = mergeOptions(
+    //                 superOptions,
+    //                 Ctor.extendOptions
+    //             );
+    //             if (options.name) {
+    //                 options.components[options.name] = Ctor;
+    //             }
+    //         }
+    //     }
+    //     return options;
+    // }
 
     function resolveModifiedOptions(Ctor) {
         var modified;
@@ -5366,14 +5318,14 @@ function () {
         return modified;
     }
 
-    function Vue(options) {
-        if (!(this instanceof Vue)) {
-            warn(
-                "Vue is a constructor and should be called with the `new` keyword"
-            );
-        }
-        this._init(options);
-    }
+    // function Vue(options) {
+    //     if (!(this instanceof Vue)) {
+    //         warn(
+    //             "Vue is a constructor and should be called with the `new` keyword"
+    //         );
+    //     }
+    //     this._init(options);
+    // }
 
     initMixin(Vue);
     stateMixin(Vue);

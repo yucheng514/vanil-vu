@@ -1,15 +1,14 @@
 import "./style.css";
 
 // import Vue from "./vue"
-import { Vue } from "./vue";
+import { Vue } from "./vue/index";
 
 
-
-var MyComponent = Vue.extend({
-    template: "<div>A custom component!</div>",
-});
-// 注册
-Vue.component("my-component", MyComponent);
+// var MyComponent = Vue.extend({
+//     template: "<div>A custom component!</div>",
+// });
+// // 注册
+// Vue.component("my-component", MyComponent);
 // debugger
 var app = new Vue({
     el: "#app",
